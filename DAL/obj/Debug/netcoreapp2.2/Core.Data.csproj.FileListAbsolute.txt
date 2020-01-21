@@ -1,0 +1,8 @@
+C:\Users\me_mo\source\repos\DAL\bin\Debug\netcoreapp2.2\Core.Data.deps.json
+C:\Users\me_mo\source\repos\DAL\bin\Debug\netcoreapp2.2\Core.Data.dll
+C:\Users\me_mo\source\repos\DAL\bin\Debug\netcoreapp2.2\Core.Data.pdb
+C:\Users\me_mo\source\repos\DAL\obj\Debug\netcoreapp2.2\Core.Data.csprojAssemblyReference.cache
+C:\Users\me_mo\source\repos\DAL\obj\Debug\netcoreapp2.2\Core.Data.AssemblyInfoInputs.cache
+C:\Users\me_mo\source\repos\DAL\obj\Debug\netcoreapp2.2\Core.Data.AssemblyInfo.cs
+C:\Users\me_mo\source\repos\DAL\obj\Debug\netcoreapp2.2\Core.Data.dll
+C:\Users\me_mo\source\repos\DAL\obj\Debug\netcoreapp2.2\Core.Data.pdb

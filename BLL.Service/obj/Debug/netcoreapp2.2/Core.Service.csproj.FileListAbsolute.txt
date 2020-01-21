@@ -1,0 +1,11 @@
+C:\Users\me_mo\source\repos\BLL.Service\bin\Debug\netcoreapp2.2\Core.Service.deps.json
+C:\Users\me_mo\source\repos\BLL.Service\bin\Debug\netcoreapp2.2\Core.Service.dll
+C:\Users\me_mo\source\repos\BLL.Service\bin\Debug\netcoreapp2.2\Core.Service.pdb
+C:\Users\me_mo\source\repos\BLL.Service\bin\Debug\netcoreapp2.2\Core.Data.dll
+C:\Users\me_mo\source\repos\BLL.Service\bin\Debug\netcoreapp2.2\Core.Data.pdb
+C:\Users\me_mo\source\repos\BLL.Service\obj\Debug\netcoreapp2.2\Core.Service.csprojAssemblyReference.cache
+C:\Users\me_mo\source\repos\BLL.Service\obj\Debug\netcoreapp2.2\Core.Service.AssemblyInfoInputs.cache
+C:\Users\me_mo\source\repos\BLL.Service\obj\Debug\netcoreapp2.2\Core.Service.AssemblyInfo.cs
+C:\Users\me_mo\source\repos\BLL.Service\obj\Debug\netcoreapp2.2\Core.Service.csproj.CopyComplete
+C:\Users\me_mo\source\repos\BLL.Service\obj\Debug\netcoreapp2.2\Core.Service.dll
+C:\Users\me_mo\source\repos\BLL.Service\obj\Debug\netcoreapp2.2\Core.Service.pdb
