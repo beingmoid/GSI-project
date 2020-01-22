@@ -72,14 +72,24 @@ namespace WebApplication2
         {
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IGameRepository, GameRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IMatchRepository, MatchRepository>();
+            services.AddScoped<IRoleRightRepository, RoleRightRepository>();
         }
+
         private void ConfigureAppServices(IServiceCollection services)
         {
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMatchService, MatchService>();
+            services.AddScoped<IRoleRightRepository, RoleRightRepository>();
         }
+    }
 
-      
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

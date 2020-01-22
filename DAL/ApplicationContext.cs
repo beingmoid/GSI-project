@@ -8,7 +8,7 @@ namespace DAL
 {
     public class ApplicationContext : EfContext
     {
-        public ApplicationContext():base("Data Source=DESKTOP-BS7R6AC;Initial Catalog=AppDB;User ID=sa;Password=moidshams")
+        public ApplicationContext():base("Data Source=DESKTOP-M5C4BD6;Initial Catalog=AppData;Integrated Security=True")
         {
 
         }

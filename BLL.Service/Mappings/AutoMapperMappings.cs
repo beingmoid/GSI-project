@@ -14,10 +14,13 @@ namespace BLL.Service.Mappings
 
 			this.CreateMap<Role>();
 			this.CreateMap<RoleRight>();
-			this.CreateMap<User>();
+            this.CreateMap<User>().ForMember(x=>x.Password,x=>x.Ignore());
 			this.CreateMap<Team>();
+            this.CreateMap<Game>();
+            this.CreateMap<Match>();
+            this.CreateMap<RoleRight>();
 
-		}
+        }
 
     }
 	public static class ExtensionMethods
