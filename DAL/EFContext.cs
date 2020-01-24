@@ -17,7 +17,6 @@ namespace DAL
 
 		public EfContext(string connectionString)
 		{
-			
 			_connectionString = connectionString;
 		}
 

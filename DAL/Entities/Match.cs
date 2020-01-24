@@ -15,6 +15,10 @@ namespace DAL.Entities
         public string Contact2 { get; set; }
         public int? Team2Id { get; set; }
         public Team Team2 { get; set; }
+   
+
+        public ICollection<MatchDetails> matchDetails;
+        public ICollection<MatchDetails> MatchDetails => MatchDetails ?? (matchDetails = new List<MatchDetails>());
 
     }
 }

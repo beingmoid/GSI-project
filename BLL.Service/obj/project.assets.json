@@ -3622,21 +3622,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\me_mo\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\me_mo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\me_mo\\OneDrive\\Desktop\\GSI\\GSI-project\\BLL.Service\\BLL.Service.csproj",
+      "projectUniqueName": "C:\\Users\\me_mo\\project\\BLL.Service\\BLL.Service.csproj",
       "projectName": "BLL.Service",
-      "projectPath": "C:\\Users\\me_mo\\OneDrive\\Desktop\\GSI\\GSI-project\\BLL.Service\\BLL.Service.csproj",
+      "projectPath": "C:\\Users\\me_mo\\project\\BLL.Service\\BLL.Service.csproj",
       "packagesPath": "C:\\Users\\me_mo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\me_mo\\OneDrive\\Desktop\\GSI\\GSI-project\\BLL.Service\\obj\\",
+      "outputPath": "C:\\Users\\me_mo\\project\\BLL.Service\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\me_mo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -3651,8 +3647,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\me_mo\\OneDrive\\Desktop\\GSI\\GSI-project\\DAL\\DAL.csproj": {
-              "projectPath": "C:\\Users\\me_mo\\OneDrive\\Desktop\\GSI\\GSI-project\\DAL\\DAL.csproj"
+            "C:\\Users\\me_mo\\project\\DAL\\DAL.csproj": {
+              "projectPath": "C:\\Users\\me_mo\\project\\DAL\\DAL.csproj"
             }
           }
         }
@@ -3683,7 +3679,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

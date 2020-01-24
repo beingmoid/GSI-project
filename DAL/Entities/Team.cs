@@ -15,6 +15,9 @@ namespace DAL.Entities
         public ICollection<Match> Team1 => Team1 ?? (_team1 = new List<Match>());
         public ICollection<Match> _team2;
         public ICollection<Match> Team2 => Team2 ?? (_team2 = new List<Match>());
+
+        public ICollection<MatchDetails> _WinningTeam;
+        public ICollection<MatchDetails> WinningTeam => WinningTeam ?? (_WinningTeam = new List<MatchDetails>());
     }
     public enum TeamType
     {

@@ -6,12 +6,12 @@
 ## Migration
 
 ### Create Migration
-	Add-Migration <file-name> -v -Project DAL -Context ApplicationContext
+ EntityFrameworkCore\Add-Migration <file-name> -v -Project DAL -Context ApplicationContext
 
 > Keep file name with date and time e.g. 200112311325
 
 ### Update Migration
-     Update-Database -v -Project DAL -Context ApplicationContext 
+     EntityFrameworkCore\Update-Database -v -Project DAL -Context ApplicationContext 
 
 ### Remove Last Migration
     Remove-Migration -Project DAL -Context ApplicationContext 

@@ -1,5 +1,6 @@
 ﻿using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,8 @@ namespace DAL
 {
     public class ApplicationContext : EfContext
     {
-        public ApplicationContext():base("Data Source=DESKTOP-M5C4BD6;Initial Catalog=AppData;Integrated Security=True")
+        //private readonly IConfiguration configuration;
+        public ApplicationContext():base("Data Source=DESKTOP-BS7R6AC;Initial Catalog=AppDB;Integrated Security=True")
         {
 
         }
@@ -28,6 +30,9 @@ namespace DAL
             this.InitializeEntity<Match>();
             this.CreateRelation<Team, Match>(x => x.Team1, x => x.Team1, x => x.Team1Id);
             this.CreateRelation<Team, Match>(x => x.Team2, x => x.Team2, x => x.Team2Id);
+            this.InitializeEntity<MatchDetails>();
+            this.CreateRelation<Team, MatchDetails>(x => x.WinningTeam, x => x.WinningTeam, x => x.WinningTeamId);
+            this.CreateRelation<Match, MatchDetails>(x => x.MatchDetails, x => x.Match, x => x.MatchId);
 
 
         }
