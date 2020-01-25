@@ -80,7 +80,7 @@ namespace BLL.Service
 			if (errors.Count > 0)
 			{
 				throw new ServiceException(errors.ToArray());
-			}
+			} 
 		}
 
 		protected virtual Task WhileInserting(IEnumerable<TEntity> entities) { return Task.FromResult(false); }

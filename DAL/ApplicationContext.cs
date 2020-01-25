@@ -20,13 +20,13 @@ namespace DAL
             this.InitializeEntity<RoleRight>();
             this.CreateRelation<Role, RoleRight>(x => x.RoleRights, x => x.Role, x => x.RoleId);
             this.InitializeEntity<User>();
-            this.CreateRelation<Role, User>(x => x.Users, x => x.Role, x => x.RoleId);
             this.InitializeEntity<Game>();
+            this.CreateRelation<Role, User>(x => x.Users, x => x.Role, x => x.RoleId);
             this.CreateRelation<User, Game>(x => x.Games, x => x.Player, x => x.PlayerId);
             this.InitializeEntity<Team>();
             this.InitializeEntity<TeamPlayers>();
             this.CreateRelation<Team, TeamPlayers>(x => x.TeamPlayers, x => x.Team, x => x.TeamId);
-            this.CreateRelation<User, TeamPlayers>(x => x.TeamPlayers, x => x.Player, x => x.PlayerId);
+             this.CreateRelation<User, TeamPlayers>(x => x.TeamPlayers, x => x.Player, x => x.PlayerId);
             this.InitializeEntity<Match>();
             this.CreateRelation<Team, Match>(x => x.Team1, x => x.Team1, x => x.Team1Id);
             this.CreateRelation<Team, Match>(x => x.Team2, x => x.Team2, x => x.Team2Id);

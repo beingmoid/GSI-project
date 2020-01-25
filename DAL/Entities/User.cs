@@ -18,11 +18,18 @@ namespace DAL.Entities
 		public int RoleId { get; set; }
 		public Role Role { get; set; }
 		public bool IsActive { get; set; }
-		public ICollection<Game> _game;
-		public ICollection<Game> Games => Games ?? (_game = new List<Game>());
+		private ICollection<Game> _game;
+		public ICollection<Game> Games
+		{
+			get => _game ?? (_game = new List<Game>());
 
-		public ICollection<TeamPlayers> _teamPlayers;
-		public ICollection<TeamPlayers> TeamPlayers => TeamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
+		}
+		//public ICollection<GenUnLocation> GenPortsOfACountry
+		//{
+		//	get => _genPortsOfACountry ?? (_genPortsOfACountry = new List<GenUnLocation>());
+		//}
+		private ICollection<TeamPlayers> _teamPlayers;
+		public ICollection<TeamPlayers> TeamPlayers => _teamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
 
 	}
 }

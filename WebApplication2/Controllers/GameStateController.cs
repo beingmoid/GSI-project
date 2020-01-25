@@ -10,16 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApplication2.Controllers
 {
    
-    public class GameStateController : ControllerBase
-    {
-        public GameStateController(RequestScope scopeContext,)
-        {
+    //public class GameStateController : ControllerBase
+    //{
+    //    public GameStateController(RequestScope scopeContext,IGameS)
+    //    {
 
-        }
-        public Task<ActionResult> Post([FromBody]object state)
-        {
+    //    }
+    //    public Task<ActionResult> Post([FromBody]object state)
+    //    {
 
-            return new JsonResult("");
-        }
-    }
+    //        return new JsonResult("");
+    //    }
+    //}
 }

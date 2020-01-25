@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace WebApplication2.Controllers
 
 		// GET api/values/5
 		[HttpGet("{id}")]
-		public virtual async Task<ActionResult> Get(TKey id) => new JsonResult(await this.Service.GetOne(o => o.Id.Equals(id)));
+		public virtual async Task<ActionResult> Get(TKey id) => new JsonResult((await this.Service.GetOne(o => o.Id.Equals(id))));
 
 		// POST api/values
 		[HttpPost]
@@ -52,7 +53,7 @@ namespace WebApplication2.Controllers
 		{
 			var result = await Service.Insert(new[] { entity });
 			if (result.Success)
-			{
+			{	
 				return new JsonResult(result.Entities.Single());
 			}
 			else

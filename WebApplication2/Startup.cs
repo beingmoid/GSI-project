@@ -21,6 +21,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using WebApplication2.ExceptionHandler;
 
 namespace WebApplication2
 {
@@ -41,7 +42,18 @@ namespace WebApplication2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddHttpContextAccessor();
 
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
 
             #region JWT
             var key = Encoding.ASCII.GetBytes(Configuration["JwtKey"]);
@@ -105,6 +117,7 @@ namespace WebApplication2
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IRoleRightRepository, RoleRightRepository>();
+            services.AddScoped<IPlayerRepository, PlayerRepository>();
         }
 
         private void ConfigureAppServices(IServiceCollection services)
@@ -114,7 +127,9 @@ namespace WebApplication2
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IMatchService, MatchService>();
-            services.AddScoped<IRoleRightRepository, RoleRightRepository>();
+            services.AddScoped<IRoleRightService, RoleRightService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IPlayerService, PlayerService>();
         }
     
 
@@ -123,16 +138,17 @@ namespace WebApplication2
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
-        }
-
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
+            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseCors("AllowAll");
         app.UseHttpsRedirection();
         app.UseMvc();
     }
