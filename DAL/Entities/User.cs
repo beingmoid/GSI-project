@@ -34,5 +34,11 @@ namespace DAL.Entities
         private ICollection<PlayerRequest> _playerRequest;
         public ICollection<PlayerRequest> PlayerRequest => _playerRequest ?? (_playerRequest = new List<PlayerRequest>());
 
+        private ICollection<PlayerStats> _playerStats;
+        public ICollection<PlayerStats> PlayerStats => _playerStats ?? (_playerStats = new List<PlayerStats>());
+
+        private ICollection<UserProfile> _userProfile;
+        public ICollection<UserProfile> UserProfile => _userProfile ?? (_userProfile = new List<UserProfile>());
+
     }
 }

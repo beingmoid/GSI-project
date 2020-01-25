@@ -36,8 +36,15 @@ namespace DAL
             this.CreateRelation<Match, MatchDetails>(x => x.MatchDetails, x => x.Match, x => x.MatchId);
             this.InitializeEntity<PlayerRequest>();
             this.CreateRelation<User, PlayerRequest>(x => x.PlayerRequest, x => x.Player, x => x.PlayerId);
-               
 
+            this.InitializeEntity<PlayerStats>();
+            this.CreateRelation<User, PlayerStats>(x => x.PlayerStats, x => x.Player, x => x.PlayerId);
+            this.CreateRelation<Match, PlayerStats>(x => x.PlayerStats, x => x.Match, x => x.MatchId);
+
+            this.InitializeEntity<UserProfile>();
+            this.CreateRelation<User, UserProfile>(x => x.UserProfile, x => x.User, x => x.UserId);
+            this.CreateRelation<Team, UserProfile>(x => x.UserProfile, x => x.Team, x => x.TeamId);
+            this.CreateRelation<PlayerStats, UserProfile>(x => x.UserProfile, x => x.PlayerStats, x => x.PlayerStatsId);
         }
 
         //protected override void SeedStaticData(ModelBuilder modelBuilder)

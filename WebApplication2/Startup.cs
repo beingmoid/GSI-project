@@ -119,6 +119,8 @@ namespace WebApplication2
             services.AddScoped<IRoleRightRepository, RoleRightRepository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IPlayerRequestRepository, PlayerRequestRepository>();
+            services.AddScoped<IPlayerStatsRepository, PlayerStatsRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
         }
 
@@ -133,6 +135,8 @@ namespace WebApplication2
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IPlayerService, PlayerService>();
             services.AddScoped<IPlayerRequestService, PlayerRequestService>();
+            services.AddScoped<IPlayerStatsService, PlayerStatsService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
         }
     
 
