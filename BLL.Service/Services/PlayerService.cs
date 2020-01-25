@@ -19,8 +19,13 @@ namespace BLL.Service.Services
             foreach (var item in entities)
             {
                 item.RoleId = 1;
+                item.IsActive = true;
             }
             return base.WhileInserting(entities);
+        }
+        protected override void Validation()
+        {
+            this.Validate(x => x.Email).Mandatory().Duplicate();
         }
     }
     public interface IPlayerService : IBaseService<User,string>

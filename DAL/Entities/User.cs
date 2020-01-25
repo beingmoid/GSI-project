@@ -14,7 +14,7 @@ namespace DAL.Entities
 		[JsonIgnore]
 		public string Password { get; set; }
 		public string SteamId { get; set; }
-		public string Email { get; set; }
+		public string Email { get; set; }   
 		public int RoleId { get; set; }
 		public Role Role { get; set; }
 		public bool IsActive { get; set; }
@@ -31,5 +31,8 @@ namespace DAL.Entities
 		private ICollection<TeamPlayers> _teamPlayers;
 		public ICollection<TeamPlayers> TeamPlayers => _teamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
 
-	}
+        private ICollection<PlayerRequest> _playerRequest;
+        public ICollection<PlayerRequest> PlayerRequest => _playerRequest ?? (_playerRequest = new List<PlayerRequest>());
+
+    }
 }

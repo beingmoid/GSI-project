@@ -19,6 +19,7 @@ namespace BLL.Service.Mappings
             this.CreateMap<Game>();
             this.CreateMap<Match>();
             this.CreateMap<RoleRight>();
+            this.CreateMap<PlayerRequest>();
 
         }
 

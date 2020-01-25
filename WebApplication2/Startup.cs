@@ -118,6 +118,8 @@ namespace WebApplication2
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IRoleRightRepository, RoleRightRepository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
+            services.AddScoped<IPlayerRequestRepository, PlayerRequestRepository>();
+
         }
 
         private void ConfigureAppServices(IServiceCollection services)
@@ -130,6 +132,7 @@ namespace WebApplication2
             services.AddScoped<IRoleRightService, RoleRightService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IPlayerRequestService, PlayerRequestService>();
         }
     
 
