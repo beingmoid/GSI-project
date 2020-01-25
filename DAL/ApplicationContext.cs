@@ -9,8 +9,9 @@ namespace DAL
 {
     public class ApplicationContext : EfContext
     {
+      
         //private readonly IConfiguration configuration;
-        public ApplicationContext():base("Data Source=DESKTOP-BS7R6AC;Initial Catalog=AppDB;Integrated Security=True")
+        public ApplicationContext():base("Data Source=DESKTOP-M5C4BD6;Initial Catalog=AppDB;Integrated Security=True")
         {
 
         }
@@ -33,7 +34,9 @@ namespace DAL
             this.InitializeEntity<MatchDetails>();
             this.CreateRelation<Team, MatchDetails>(x => x.WinningTeam, x => x.WinningTeam, x => x.WinningTeamId);
             this.CreateRelation<Match, MatchDetails>(x => x.MatchDetails, x => x.Match, x => x.MatchId);
-
+            this.InitializeEntity<PlayerRequest>();
+            this.CreateRelation<User, PlayerRequest>(x => x.PlayerRequest, x => x.Player, x => x.PlayerId);
+               
 
         }
 
