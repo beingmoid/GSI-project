@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200125175900_12620202258")]
+    partial class _12620202258
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -423,49 +425,6 @@ namespace DAL.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("DAL.Entities.UserProfile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CompanyId")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime?>("CreateTime");
-
-                    b.Property<string>("CreateUserId")
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime?>("EditTime");
-
-                    b.Property<string>("EditUserId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("PlayerStatsId");
-
-                    b.Property<int?>("TeamId");
-
-                    b.Property<int?>("TenantId");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlayerStatsId");
-
-                    b.HasIndex("TeamId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserProfile");
-                });
-
             modelBuilder.Entity("DAL.Entities.Game", b =>
                 {
                     b.HasOne("DAL.Entities.User", "Player")
@@ -552,24 +511,6 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("DAL.Entities.UserProfile", b =>
-                {
-                    b.HasOne("DAL.Entities.PlayerStats", "PlayerStats")
-                        .WithMany("UserProfile")
-                        .HasForeignKey("PlayerStatsId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("DAL.Entities.Team", "Team")
-                        .WithMany("UserProfile")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("DAL.Entities.User", "User")
-                        .WithMany("UserProfile")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

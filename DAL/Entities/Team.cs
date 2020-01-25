@@ -22,6 +22,11 @@ namespace DAL.Entities
 
         private ICollection<PlayerRequest> _playerRequest;
         public ICollection<PlayerRequest> PlayerRequest => _playerRequest ?? (_playerRequest = new List<PlayerRequest>());
+        
+        private ICollection<UserProfile> _userProfile;
+        public ICollection<UserProfile> UserProfile => _userProfile ?? (_userProfile = new List<UserProfile>());
+
+
     }
     public enum TeamType
     {
