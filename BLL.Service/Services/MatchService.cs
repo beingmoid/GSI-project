@@ -3,6 +3,7 @@ using DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BLL.Service.Services
 {
@@ -13,7 +14,17 @@ namespace BLL.Service.Services
         {
 
         }
+
+        protected override Task WhileInserting(IEnumerable<Match> entities)
+        {
+            foreach (var item in entities)
+            {
+                item.IsActive = true;
+            }
+            return base.WhileInserting(entities);
+        }
     }
+   
     public interface IMatchService : IBaseService<Match,int>
     {
 

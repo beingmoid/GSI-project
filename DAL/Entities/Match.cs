@@ -17,8 +17,8 @@ namespace DAL.Entities
         public Team Team2 { get; set; }
    
 
-        public ICollection<MatchDetails> matchDetails;
-        public ICollection<MatchDetails> MatchDetails => MatchDetails ?? (matchDetails = new List<MatchDetails>());
+        private ICollection<MatchDetails> matchDetails;
+        public ICollection<MatchDetails> MatchDetails => matchDetails ?? (matchDetails = new List<MatchDetails>());
 
         private ICollection<PlayerStats> _playerStats;
         public ICollection<PlayerStats> PlayerStats => _playerStats ?? (_playerStats = new List<PlayerStats>());
