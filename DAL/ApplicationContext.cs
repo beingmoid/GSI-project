@@ -9,9 +9,9 @@ namespace DAL
 {
     public class ApplicationContext : EfContext
     {
-      
+    
         //private readonly IConfiguration configuration;
-        public ApplicationContext():base("Data Source=DESKTOP-M5C4BD6;Initial Catalog=AppDB;Integrated Security=True")
+        public ApplicationContext():base("Data Source=DESKTOP-BS7R6AC;Initial Catalog=AppDB;Integrated Security=True")
         {
 
         }
