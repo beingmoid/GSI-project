@@ -56,6 +56,8 @@ namespace DAL.Repositories
 
 		public async Task<Dictionary<TKey, TReturn>> Get<TReturn>(Expression<Func<TEntity, TReturn>> selectExpression, Func<TReturn, TKey> keySelector)
 			=> await this.Query.Select(selectExpression).ToDictionaryAsync(keySelector);
+
+	
 		public async Task<Dictionary<TKey, TReturn>> Get<TReturn>(Func<IQueryable<TEntity>, IQueryable<TEntity>> includeExpression, Expression<Func<TEntity, TReturn>> selectExpression, Func<TReturn, TKey> keySelector)
 			=> await ApplyPredicates(includeExpression(_baseQuery)).Select(selectExpression).ToDictionaryAsync(keySelector);
 

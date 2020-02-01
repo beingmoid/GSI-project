@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200131144358_1312020742")]
+    partial class _1312020742
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,6 +314,8 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CaptainId");
+
                     b.Property<string>("CompanyId")
                         .HasMaxLength(100);
 
@@ -324,11 +328,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("EditUserId");
 
-                    b.Property<bool>("IsCaptain");
-
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("PlayerId");
 
                     b.Property<string>("TeamImage");
 
@@ -344,7 +344,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlayerId");
+                    b.HasIndex("CaptainId");
 
                     b.ToTable("Team");
                 });
@@ -544,9 +544,9 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Entities.Team", b =>
                 {
-                    b.HasOne("DAL.Entities.User", "Player")
+                    b.HasOne("DAL.Entities.User", "Captain")
                         .WithMany("Teams")
-                        .HasForeignKey("PlayerId")
+                        .HasForeignKey("CaptainId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

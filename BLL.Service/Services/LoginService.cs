@@ -39,7 +39,7 @@ namespace BLL.Service.Services
 				{
 					Subject = new ClaimsIdentity(new Claim[]
 					{
-						new Claim(ClaimTypes.Name, user.Id),
+						new Claim("UserId", user.Id),
 						new Claim("tenantId", user.TenantId.ToString())
 					}),
 					Expires = DateTime.UtcNow.AddDays(1),

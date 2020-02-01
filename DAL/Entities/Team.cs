@@ -9,20 +9,23 @@ namespace DAL.Entities
         public string TeamName { get; set; }
         public string TeamImage { get; set; }
         public TeamType TeamType { get; set; }
-        public ICollection<TeamPlayers> _teamPlayers;
+        public bool IsCaptain { get; set; }
+        public string PlayerId { get; set; }
+        public User Player { get; set; }
+        private ICollection<TeamPlayers> _teamPlayers;
         public ICollection<TeamPlayers> TeamPlayers => _teamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
-        public ICollection<Match> _team1;
+        private ICollection<Match> _team1;
         public ICollection<Match> Team1 => _team1 ?? (_team1 = new List<Match>());
-        public ICollection<Match> _team2;
+        private ICollection<Match> _team2;
         public ICollection<Match> Team2 => _team2 ?? (_team2 = new List<Match>());
 
-        public ICollection<MatchDetails> _WinningTeam;
+        private ICollection<MatchDetails> _WinningTeam;
         public ICollection<MatchDetails> WinningTeam => _WinningTeam ?? (_WinningTeam = new List<MatchDetails>());
 
 
         private ICollection<PlayerRequest> _playerRequest;
         public ICollection<PlayerRequest> PlayerRequest => _playerRequest ?? (_playerRequest = new List<PlayerRequest>());
-        
+    
         private ICollection<UserProfile> _userProfile;
         public ICollection<UserProfile> UserProfile => _userProfile ?? (_userProfile = new List<UserProfile>());
 

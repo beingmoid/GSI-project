@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200127155302_1272020849")]
+    partial class _1272020849
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,11 +326,7 @@ namespace DAL.Migrations
 
                     b.Property<string>("EditUserId");
 
-                    b.Property<bool>("IsCaptain");
-
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("PlayerId");
 
                     b.Property<string>("TeamImage");
 
@@ -343,8 +341,6 @@ namespace DAL.Migrations
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId");
 
                     b.ToTable("Team");
                 });
@@ -421,8 +417,6 @@ namespace DAL.Migrations
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<Guid>("token");
 
                     b.HasKey("Id");
 
@@ -539,14 +533,6 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Entities.Role", "Role")
                         .WithMany("RoleRights")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("DAL.Entities.Team", b =>
-                {
-                    b.HasOne("DAL.Entities.User", "Player")
-                        .WithMany("Teams")
-                        .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

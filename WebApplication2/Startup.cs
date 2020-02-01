@@ -22,6 +22,8 @@ using Newtonsoft.Json;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication2.ExceptionHandler;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace WebApplication2
 {
@@ -74,10 +76,12 @@ namespace WebApplication2
                     ValidateAudience = false
                 };
             });
-            services.AddAuthentication().AddSteam();
+
             #endregion
 
 
+            services.AddSingleton<IFileProvider>(
+       new PhysicalFileProvider(Directory.GetCurrentDirectory()));
             services.AddScoped<RequestScope<EfContext>>(provider =>
             {
                 var dbContext = provider.GetRequiredService<EfContext>();
@@ -89,7 +93,7 @@ namespace WebApplication2
                 var logger = provider.GetRequiredService<ILogger<Program>>();
                 var context = provider.GetRequiredService<IHttpContextAccessor>();
                 var claims = context.HttpContext.User.Claims;
-                var userId = claims.FirstOrDefault(o => o.Type == "user_id")?.Value;
+                var userId = claims.FirstOrDefault(o => o.Type == "UserId")?.Value;
 
                 var mapper = provider.GetRequiredService<IMapper>();
 
@@ -137,6 +141,8 @@ namespace WebApplication2
             services.AddScoped<IPlayerRequestService, PlayerRequestService>();
             services.AddScoped<IPlayerStatsService, PlayerStatsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IGameStateService, GameStateService>();
+           // services.AddScoped<IHttpContextAccessor,HttpContextAccessor>();
         }
     
 
@@ -157,6 +163,7 @@ namespace WebApplication2
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseCors("AllowAll");
         app.UseHttpsRedirection();
+            app.UseAuthentication();
         app.UseMvc();
     }
 }
