@@ -106,6 +106,11 @@ namespace BLL.Service
 			return await Repository.GetOne(predicates);
 		}
 
+		public async Task<Dictionary<TKey, TEntity>> Get(Func<IQueryable<TEntity>, IQueryable<TEntity>> includeExpression, params Expression<Func<TEntity, bool>>[] predicates)
+		{
+			return await Repository.Get(includeExpression, predicates);
+		}
+
 		#endregion
 
 		public async Task<(Dictionary<TKey, TEntity> Entities, bool Success)> Insert(IEnumerable<TEntity> entities)
@@ -203,7 +208,7 @@ namespace BLL.Service
 		Task<Dictionary<TKey, TEntity>> Get();
 		Task<Dictionary<TKey, TEntity>> Get(params Expression<Func<TEntity, bool>>[] predicates);
 		Task<TEntity> GetOne(params Expression<Func<TEntity, bool>>[] predicates);
-
+		Task<Dictionary<TKey, TEntity>> Get(Func<IQueryable<TEntity>, IQueryable<TEntity>> includeExpression, params Expression<Func<TEntity, bool>>[] predicates);
 		#endregion
 
 		Task<(Dictionary<TKey, TEntity> Entities, bool Success)> Insert(IEnumerable<TEntity> entities);
