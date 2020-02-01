@@ -19,14 +19,16 @@ namespace BLL.Service.Services
           
         }
 
-        public async Task<List<Team>> GetTeams(string PlayerId)
-        {
-            var teams = (await this.Get(x => x.PlayerId == PlayerId))?.Values.ToList();
-            return teams;
-        }
+        //public async Task<List<Team>> GetTeams(string PlayerId)
+        //{
+        //    //var teams = (await this.Get(x => x.PlayerId == PlayerId))?.Values.ToList();
+        //   // return teams;
+        //}
+    
+    
     }
-    public interface ITeamService : IBaseService<Team,int>
+    public interface ITeamService : IBaseService<Team, int>
     {
-        Task<List<Team>> GetTeams(string PlayerId);
+       // Task<List<Team>> GetTeams(string PlayerId);
     }
 }

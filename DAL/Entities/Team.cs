@@ -9,9 +9,9 @@ namespace DAL.Entities
         public string TeamName { get; set; }
         public string TeamImage { get; set; }
         public TeamType TeamType { get; set; }
-        public bool IsCaptain { get; set; }
-        public string PlayerId { get; set; }
-        public User Player { get; set; }
+        //public bool IsCaptain { get; set; }
+        //public string PlayerId { get; set; }
+        //public User Player { get; set; }
         private ICollection<TeamPlayers> _teamPlayers;
         public ICollection<TeamPlayers> TeamPlayers => _teamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
         private ICollection<Match> _team1;

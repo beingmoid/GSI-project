@@ -18,11 +18,12 @@ namespace BLL.Service.Mappings
 			this.CreateMap<Team>();
             this.CreateMap<Game>();
             this.CreateMap<Match>();
-            this.CreateMap<RoleRight>();
+            //this.CreateMap<RoleRight>();
             this.CreateMap<PlayerRequest>();
             this.CreateMap<PlayerStats>();
             this.CreateMap<UserProfile>();
-
+            this.CreateMap<TeamPlayers>();
+            this.CreateMap<MatchDetails>();
         }
 
     }

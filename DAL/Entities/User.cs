@@ -26,14 +26,14 @@ namespace DAL.Entities
 			get => _game ?? (_game = new List<Game>());
 
 		}
-		//public ICollection<GenUnLocation> GenPortsOfACountry
-		//{
-		//	get => _genPortsOfACountry ?? (_genPortsOfACountry = new List<GenUnLocation>());
-		//}
-		private ICollection<TeamPlayers> _teamPlayers;
-		public ICollection<TeamPlayers> TeamPlayers => _teamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
-		private ICollection<Team> _team;
-		public ICollection<Team> Teams => _team ?? (_team = new List<Team>());
+        //public ICollection<GenUnLocation> GenPortsOfACountry
+        //{
+        //	get => _genPortsOfACountry ?? (_genPortsOfACountry = new List<GenUnLocation>());
+        //}
+        private ICollection<TeamPlayers> _teamPlayers;
+        public ICollection<TeamPlayers> TeamPlayers => _teamPlayers ?? (_teamPlayers = new List<TeamPlayers>());
+  //      private ICollection<Team> _team;
+		//public ICollection<Team> Teams => _team ?? (_team = new List<Team>());
 
 
 		private ICollection<PlayerRequest> _playerRequest;

@@ -45,7 +45,7 @@ namespace DAL
             this.CreateRelation<User, UserProfile>(x => x.UserProfile, x => x.User, x => x.UserId);
             this.CreateRelation<Team, UserProfile>(x => x.UserProfile, x => x.Team, x => x.TeamId);
             this.CreateRelation<PlayerStats, UserProfile>(x => x.UserProfile, x => x.PlayerStats, x => x.PlayerStatsId);
-            this.CreateRelation<User, Team>(x => x.Teams, x => x.Player, x => x.PlayerId);
+          //  this.CreateRelation<User, Team>(x => x.Teams, x => x.Player, x => x.PlayerId);
 
         }
 

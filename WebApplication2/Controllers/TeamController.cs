@@ -20,18 +20,18 @@ namespace WebApplication2.Controllers
 
             _teamService = service;
         }
-        public override Task<ActionResult> Post([FromBody] Team entity)
-        {
-            entity.PlayerId = this.User.Claims.First(i => i.Type == "UserId").Value;
-            entity.IsCaptain = true;
-            return base.Post(entity);
-        }
-        [HttpGet("GetTeams")]
-        public async Task<ActionResult> GetTeams() {
+        //public override Task<ActionResult> Post([FromBody] Team entity)
+        //{
+        //    //entity.PlayerId = this.User.Claims.First(i => i.Type == "UserId").Value;
+        //    //entity.IsCaptain = true;
+        //    return base.Post(entity);
+        //}
+        //[HttpGet("GetTeams")]
+        //public async Task<ActionResult> GetTeams() {
             
-            var playerId = this.User.Claims.First(i => i.Type == "UserId")?.Value;
-            return new JsonResult((await _teamService.GetTeams(playerId)));
+        //    var playerId = this.User.Claims.First(i => i.Type == "UserId")?.Value;
+        //    return new JsonResult((await _teamService.GetTeams(playerId)));
 
-        } 
+        //} 
     }
 }
