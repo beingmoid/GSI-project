@@ -126,6 +126,7 @@ namespace WebApplication2
             services.AddScoped<IPlayerStatsRepository, PlayerStatsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<ITeamPlayerRepository, TeamPlayerRepository>();
+            services.AddScoped<IMatchDetailsRepository, MatchDetailsRepository>();
 
         }
 
@@ -144,6 +145,7 @@ namespace WebApplication2
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IGameStateService, GameStateService>();
             services.AddScoped<ITeamPlayersService, TeamPlayersService>();
+            services.AddScoped<IMatchDetailsService, MatchDetailsService>();
             // services.AddScoped<IHttpContextAccessor,HttpContextAccessor>();
         }
     
