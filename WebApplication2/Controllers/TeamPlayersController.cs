@@ -23,7 +23,7 @@ namespace WebApplication2.Controllers
         {
             var playerId = this.User.Claims.First(i => i.Type == "UserId")?.Value;
             return new JsonResult((await _teamPlayerService.GetTeams(playerId)));
-        }
+        } 
 
     }
 }

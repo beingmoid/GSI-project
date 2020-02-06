@@ -11,12 +11,16 @@ namespace BLL.Service.Services
 {
    public class TeamService : BaseService<Team,int>, ITeamService
     {
-   
-        public TeamService(RequestScope scopeContext, ITeamRepository repository)
+
+        private ITeamPlayersService _teamPlayerService;
+        private IHttpContextAccessor _httpContextAccessor;
+        public TeamService(RequestScope scopeContext, ITeamRepository repository, ITeamPlayersService teamPlayerService,
+            IHttpContextAccessor httpContextAccessor)
 
             : base(scopeContext, repository)
         {
-          
+            _teamPlayerService = teamPlayerService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         //public async Task<List<Team>> GetTeams(string PlayerId)
@@ -24,8 +28,19 @@ namespace BLL.Service.Services
         //    //var teams = (await this.Get(x => x.PlayerId == PlayerId))?.Values.ToList();
         //   // return teams;
         //}
-    
-    
+        protected async override Task OnInserted(IEnumerable<Team> entities)
+        {
+            foreach (var entity in entities)
+            {
+                List<TeamPlayers> li = new List<TeamPlayers>();
+                var UserId = _httpContextAccessor.HttpContext.User.FindFirst(x => x.Type == "UserId")?.Value;
+                li.Add(new TeamPlayers { PlayerId = UserId, TeamId = entity.Id, IsCaptain = true });
+                await _teamPlayerService.Insert(li);
+            }
+        
+        
+        }
+
     }
     public interface ITeamService : IBaseService<Team, int>
     {

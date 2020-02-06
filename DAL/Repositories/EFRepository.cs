@@ -52,7 +52,8 @@ namespace DAL.Repositories
 		public async Task<Dictionary<TKey, TEntity>> Get(params Expression<Func<TEntity, bool>>[] predicates)
 			=> await ApplyPredicates(this.Query, predicates).ToDictionaryAsync(o => o.Id);
 		public async Task<Dictionary<TKey, TEntity>> Get(Func<IQueryable<TEntity>, IQueryable<TEntity>> includeExpression, params Expression<Func<TEntity, bool>>[] predicates)
-			=> await ApplyPredicates(includeExpression(_baseQuery)).ToDictionaryAsync(o => o.Id);
+			=> await ApplyPredicates(includeExpression(_baseQuery),predicates).ToDictionaryAsync(o => o.Id);
+	
 
 		public async Task<Dictionary<TKey, TReturn>> Get<TReturn>(Expression<Func<TEntity, TReturn>> selectExpression, Func<TReturn, TKey> keySelector)
 			=> await this.Query.Select(selectExpression).ToDictionaryAsync(keySelector);
