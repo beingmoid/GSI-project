@@ -22,13 +22,11 @@ namespace WebApplication2.Controllers
             _teamPlayerService = teamPlayerService;
             _teamService = service;
         }
-     
-        //[HttpGet("GetTeams")]
-        //public async Task<ActionResult> GetTeams() {
+        [HttpGet("GetRequestReceived")]
+        public async Task<ActionResult> TeamRequest(int teamId) => new JsonResult(await _teamService.GetRequestReceived(teamId));
 
-        //    var playerId = this.User.Claims.First(i => i.Type == "UserId")?.Value;
-        //    return new JsonResult((await _teamService.GetTeams(playerId)));
-
-        //} 
+        [HttpGet("TeamSearch")]
+        public async Task<ActionResult> TeamSearch(string searchVal, int ownId) => new JsonResult(await _teamService.GetTeams(searchVal, ownId));
+        
     }
 }

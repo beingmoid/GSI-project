@@ -4,9 +4,24 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <UserSecretsId>e665975f-2dfd-48e0-82fb-60a726d809d6</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AppData\00000000-0000-0000-0000-000000000000.cfg" />
+    <None Remove="AppData\fcd1f547-b359-4682-9172-02ab8951fb95.cfg" />
+    <None Remove="AppData\gamestate_integration_testv1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="AppData\00000000-0000-0000-0000-000000000000.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AppData\gamestate_integration_testv1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OpenId.Steam" Version="2.1.0" />
@@ -21,6 +36,12 @@
   <ItemGroup>
     <ProjectReference Include="..\BLL.Service\BLL.Service.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="AppData\fcd1f547-b359-4682-9172-02ab8951fb95.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

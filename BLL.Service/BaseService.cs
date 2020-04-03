@@ -41,6 +41,11 @@ namespace BLL.Service
 			{
 				_propertyValidations = new List<IPropertyValidation<TEntity>>();
 				Validation();
+				
+			}
+			else
+			{
+				Validation();
 			}
 		}
 
@@ -121,7 +126,7 @@ namespace BLL.Service
 				{
 					var newEntity = new TEntity();
 					this.Map(entity, newEntity);
-					await this.Validate(newEntity);
+					
 					newEntities.Add(newEntity);
 				}));
 

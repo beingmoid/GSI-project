@@ -24,6 +24,8 @@ namespace BLL.Service.Mappings
             this.CreateMap<UserProfile>();
             this.CreateMap<TeamPlayers>();
             this.CreateMap<MatchDetails>();
+			this.CreateMap<MatchRequest>();
+			this.CreateMap<GameStates>();
         }
 
     }

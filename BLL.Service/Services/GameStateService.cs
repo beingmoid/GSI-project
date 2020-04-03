@@ -6,15 +6,15 @@ using System.Text;
 
 namespace BLL.Service.Services
 {
-   public class GameStateService : BaseService, IGameStateService
+   public class GameStateService : BaseService<GameStates,int>, IGameStateService
     {
-        public GameStateService(RequestScope scopeContext)
-            :base(scopeContext)
+        public GameStateService(RequestScope scopeContext, IGameStateRepository repository)
+            :base(scopeContext, repository)
         {
 
         }
     }
-    public interface IGameStateService : IBaseService
+    public interface IGameStateService : IBaseService<GameStates, int>
     {
 
     }

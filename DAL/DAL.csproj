@@ -9,6 +9,14 @@
     <Compile Remove="Migrations\20200127155050_1272020849.Designer.cs" />
     <Compile Remove="Migrations\20200127155429_12720208454.cs" />
     <Compile Remove="Migrations\20200127155429_12720208454.Designer.cs" />
+    <Compile Remove="Migrations\20200208112455_282020424.cs" />
+    <Compile Remove="Migrations\20200208112455_282020424.Designer.cs" />
+    <Compile Remove="Migrations\20200208125439_2820204242.cs" />
+    <Compile Remove="Migrations\20200208125439_2820204242.Designer.cs" />
+    <Compile Remove="Migrations\20200208154531_2820204242.cs" />
+    <Compile Remove="Migrations\20200208154531_2820204242.Designer.cs" />
+    <Compile Remove="Migrations\20200208154733_28202042425.cs" />
+    <Compile Remove="Migrations\20200208154733_28202042425.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

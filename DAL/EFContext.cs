@@ -25,6 +25,8 @@ namespace DAL
 			base.OnModelCreating(modelBuilder);
 			_modelBuilder = modelBuilder;
 
+			modelBuilder.Entity<TeamPlayers>().HasIndex(i => i.PlayerId).IsUnique();
+
 			InitializeEntities();
 			//SeedStaticData(modelBuilder);
 			//SeedTestingData(modelBuilder);
@@ -32,7 +34,7 @@ namespace DAL
 
 		protected abstract void InitializeEntities();
 
-		//protected abstract void SeedStaticData(ModelBuilder modelBuilder);
+		protected abstract void SeedStaticData(ModelBuilder modelBuilder);
 
 		//protected abstract void SeedTestingData(ModelBuilder modelBuilder);
 

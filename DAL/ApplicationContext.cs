@@ -10,8 +10,8 @@ namespace DAL
     public class ApplicationContext : EfContext
     {
     
-        //private readonly IConfiguration configuration;
-        public ApplicationContext():base("Data Source=DESKTOP-BS7R6AC;Initial Catalog=AppDB;Integrated Security=True")
+        private readonly IConfiguration _configuration;
+        public ApplicationContext(IConfiguration configuration):base(configuration["DefaultConnection"])
         {
 
         }
@@ -45,14 +45,32 @@ namespace DAL
             this.CreateRelation<User, UserProfile>(x => x.UserProfile, x => x.User, x => x.UserId);
             this.CreateRelation<Team, UserProfile>(x => x.UserProfile, x => x.Team, x => x.TeamId);
             this.CreateRelation<PlayerStats, UserProfile>(x => x.UserProfile, x => x.PlayerStats, x => x.PlayerStatsId);
-          //  this.CreateRelation<User, Team>(x => x.Teams, x => x.Player, x => x.PlayerId);
+
+            this.InitializeEntity<MatchRequest>();
+            this.CreateRelation<Team, MatchRequest>(x => x.SenderMatchRequest, x => x.SenderTeam, x => x.SenderTeamId);
+            this.CreateRelation<Team, MatchRequest>(x => x.ReceiverMatchRequest, x => x.ReceiverTeam, x => x.ReceiverTeamId);
+            this.InitializeEntity<GameStates>();
+            this.CreateRelation<Match, GameStates>(x => x.GameStates, x => x.Match, x => x.MatchId);
+            //  this.CreateRelation<User, Team>(x => x.Teams, x => x.Player, x => x.PlayerId);
 
         }
 
-        //protected override void SeedStaticData(ModelBuilder modelBuilder)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        protected override void SeedStaticData(ModelBuilder modelBuilder)
+        {
+            #region Roles
+            this.SeedData(
+                new Role { Id = 1, RoleName= "Admin", RoleType = RoleType.Admin },
+            new Role { Id = 2, RoleName = "Player", RoleType = RoleType.Player });
+
+            #endregion
+
+            #region Users
+            this.SeedData(
+                new User { Id = "xnxAdmin", Password = "xnxAdmin", RoleId = 1 },
+            new User { Id = "xnxPlayer", Password = "xnxPlayer", RoleId = 2 });
+
+            #endregion
+        }
 
         //protected override void SeedTestingData(ModelBuilder modelBuilder)
         //{

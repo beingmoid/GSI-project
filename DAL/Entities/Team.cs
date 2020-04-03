@@ -30,6 +30,13 @@ namespace DAL.Entities
         public ICollection<UserProfile> UserProfile => _userProfile ?? (_userProfile = new List<UserProfile>());
 
 
+        private ICollection<MatchRequest> _SenderMatchRequest;
+        public ICollection<MatchRequest> SenderMatchRequest => _SenderMatchRequest ?? (_SenderMatchRequest = new List<MatchRequest>());
+
+        private ICollection<MatchRequest> _ReceiverMatchRequest;
+        public ICollection<MatchRequest> ReceiverMatchRequest => _ReceiverMatchRequest ?? (_ReceiverMatchRequest = new List<MatchRequest>());
+
+
     }
     public enum TeamType
     {

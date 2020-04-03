@@ -8,7 +8,7 @@ namespace DAL.Entities
     {
         public int TeamId { get; set; }
 
-        public Team Team { get; set; }
+        public Team Team { get; set; }        
         public string PlayerId { get; set; }
         public User Player { get; set; }
         public bool IsCaptain { get; set; }

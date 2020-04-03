@@ -19,11 +19,17 @@ namespace BLL.Service.Services
             {
             _scopeContext = scopeContext;
             }
-        protected override void Validation()
+
+        protected async override Task WhileInserting(IEnumerable<TeamPlayers> entities)
         {
-            this.Validate(x => x.PlayerId,"Already a part of team").Duplicate();
-            base.Validation();
+            var team = await this.GetOne(x => x.PlayerId == entities.ToList()[0].PlayerId);
+            if (team!=null)
+            {
+                throw new ServiceException("Player Already Exist");
+            }
+            
         }
+        
 
         public async Task<object> GetTeams(string PlayerId)
         {

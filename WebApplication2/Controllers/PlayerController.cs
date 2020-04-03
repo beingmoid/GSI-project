@@ -36,6 +36,7 @@ namespace WebApplication2.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
         [HttpPost("Add")]
+        [AllowAnonymous]
         public async Task<ActionResult> Add([FromBody] Player entity) 
         {
             entity.RoleId = 2;
@@ -96,7 +97,7 @@ namespace WebApplication2.Controllers
             var test = System.IO.File.ReadAllText(_env.ContentRootPath + @"\\AppData\\gamestate_integration_testv1" + ".txt");
             System.IO.File.WriteAllText(_env.ContentRootPath + "\\AppData\\" + user.token + ".cfg", test.Replace("{token_here}", user.token.ToString()));
             test = System.IO.File.ReadAllText(_env.ContentRootPath + "\\AppData\\" + user.token + ".cfg");
-            return new JsonResult(_env.ContentRootPath + "\\AppData\\" + user.token + ".cfg");
+            return new JsonResult(test);
         }
 
         [HttpGet("FilterList")]

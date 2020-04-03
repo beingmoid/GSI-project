@@ -24,6 +24,8 @@ using Microsoft.IdentityModel.Tokens;
 using WebApplication2.ExceptionHandler;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using WebApplication2.Controllers;
+using BLL.Service.Hubs;
 
 namespace WebApplication2
 {
@@ -39,10 +41,31 @@ namespace WebApplication2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddDistributedMemoryCache();
             services.AddAutoMapper(typeof(AutoMapperMappings).Assembly);
             services.AddDbContext<EfContext, ApplicationContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddHttpContextAccessor();
+            services.AddSignalR();
+
+            services.AddAuthentication().AddSteam(options=> {
+                options.ApplicationKey = "8F48B0D274523F0FA2252C995B2CBCA1";
+                options.CallbackPath = "/Login/Steam";
+                options.Authority = new Uri("https://steamcommunity.com/openid/");
+
+
+
+            });
+
 
             services.AddCors(options =>
             {
@@ -109,6 +132,13 @@ namespace WebApplication2
                 //    options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
                 //}
             });
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "GSI Session";
+                options.IdleTimeout = TimeSpan.FromHours(1);
+                options.Cookie.IsEssential = true;
+
+            });
             ConfigureRepositories(services);
             ConfigureAppServices(services);
         }
@@ -127,6 +157,8 @@ namespace WebApplication2
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<ITeamPlayerRepository, TeamPlayerRepository>();
             services.AddScoped<IMatchDetailsRepository, MatchDetailsRepository>();
+            services.AddScoped<IMatchRequestRepository, MatchRequestRepository>();
+            services.AddScoped<IGameStateRepository, GameStateRepository>();
 
         }
 
@@ -146,7 +178,12 @@ namespace WebApplication2
             services.AddScoped<IGameStateService, GameStateService>();
             services.AddScoped<ITeamPlayersService, TeamPlayersService>();
             services.AddScoped<IMatchDetailsService, MatchDetailsService>();
+            services.AddScoped<IMatchRequestService, MatchRequestService>();
+            services.AddSingleton<MatchHub>();
             // services.AddScoped<IHttpContextAccessor,HttpContextAccessor>();
+
+
+
         }
     
 
@@ -164,11 +201,20 @@ namespace WebApplication2
             //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             //    app.UseHsts();
             //}
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<MatchHub>("/match");
+            });
             app.UseMiddleware<ExceptionMiddleware>();
+           
             app.UseCors("AllowAll");
-        app.UseHttpsRedirection();
+           
+            app.UseHttpsRedirection();
             app.UseAuthentication();
-        app.UseMvc();
+            app.UseSession();
+            app.UseMvc();
+            
+           
     }
 }
     }

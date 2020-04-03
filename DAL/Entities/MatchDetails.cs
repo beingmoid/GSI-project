@@ -11,7 +11,7 @@ namespace DAL.Entities
         public string Score { get; set; }
         public bool IsActive  { get; set; }
         public bool Status { get; set; }
-        public int WinningTeamId { get; set; }
+        public int? WinningTeamId { get; set; }
         public Team WinningTeam { get; set; }
 
 

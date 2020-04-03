@@ -13,6 +13,8 @@ namespace DAL.Entities
 		public override string Id { get => base.Id; set => base.Id = value; }
 		[JsonIgnore]
 		public string Password { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
 		public string SteamId { get; set; }
 		public string Email { get; set; }
 		public int RoleId { get; set; }

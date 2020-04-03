@@ -56,11 +56,50 @@ namespace DAL.Migrations
                     b.ToTable("Game");
                 });
 
+            modelBuilder.Entity("DAL.Entities.GameStates", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CompanyId")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("CreateTime");
+
+                    b.Property<string>("CreateUserId")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("EditTime");
+
+                    b.Property<string>("EditUserId");
+
+                    b.Property<string>("GameStateJSON");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("MatchId");
+
+                    b.Property<int?>("TenantId");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatchId");
+
+                    b.ToTable("GameStates");
+                });
+
             modelBuilder.Entity("DAL.Entities.Match", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ApprovalCounter");
 
                     b.Property<string>("CompanyId")
                         .HasMaxLength(100);
@@ -82,9 +121,15 @@ namespace DAL.Migrations
 
                     b.Property<bool>("IsDeleted");
 
+                    b.Property<bool?>("IsFinished");
+
+                    b.Property<bool?>("IsStart");
+
                     b.Property<decimal?>("Latitude");
 
                     b.Property<decimal>("Longitude");
+
+                    b.Property<int>("Status");
 
                     b.Property<int?>("Team1Id");
 
@@ -139,7 +184,7 @@ namespace DAL.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<int>("WinningTeamId");
+                    b.Property<int?>("WinningTeamId");
 
                     b.HasKey("Id");
 
@@ -148,6 +193,57 @@ namespace DAL.Migrations
                     b.HasIndex("WinningTeamId");
 
                     b.ToTable("MatchDetails");
+                });
+
+            modelBuilder.Entity("DAL.Entities.MatchRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CompanyId")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Contact1");
+
+                    b.Property<string>("Contact2");
+
+                    b.Property<DateTime?>("CreateTime");
+
+                    b.Property<string>("CreateUserId")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime?>("EditTime");
+
+                    b.Property<string>("EditUserId");
+
+                    b.Property<bool>("IsAccepted");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<decimal?>("Latitude");
+
+                    b.Property<decimal?>("Longitude");
+
+                    b.Property<int?>("ReceiverTeamId");
+
+                    b.Property<int?>("SenderTeamId");
+
+                    b.Property<bool?>("Status");
+
+                    b.Property<int?>("TenantId");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverTeamId");
+
+                    b.HasIndex("SenderTeamId");
+
+                    b.ToTable("MatchRequest");
                 });
 
             modelBuilder.Entity("DAL.Entities.PlayerRequest", b =>
@@ -377,7 +473,9 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PlayerId");
+                    b.HasIndex("PlayerId")
+                        .IsUnique()
+                        .HasFilter("[PlayerId] IS NOT NULL");
 
                     b.HasIndex("TeamId");
 
@@ -402,9 +500,13 @@ namespace DAL.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("FirstName");
+
                     b.Property<bool>("IsActive");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastName");
 
                     b.Property<string>("Password");
 
@@ -478,6 +580,14 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
+            modelBuilder.Entity("DAL.Entities.GameStates", b =>
+                {
+                    b.HasOne("DAL.Entities.Match", "Match")
+                        .WithMany("GameStates")
+                        .HasForeignKey("MatchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("DAL.Entities.Match", b =>
                 {
                     b.HasOne("DAL.Entities.Team", "Team1")
@@ -501,6 +611,19 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Entities.Team", "WinningTeam")
                         .WithMany("WinningTeam")
                         .HasForeignKey("WinningTeamId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("DAL.Entities.MatchRequest", b =>
+                {
+                    b.HasOne("DAL.Entities.Team", "ReceiverTeam")
+                        .WithMany("ReceiverMatchRequest")
+                        .HasForeignKey("ReceiverTeamId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("DAL.Entities.Team", "SenderTeam")
+                        .WithMany("SenderMatchRequest")
+                        .HasForeignKey("SenderTeamId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

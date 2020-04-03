@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BLL.Service.Services;
 using DAL.Entities;
 using DAL.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication2.Controllers
@@ -16,6 +17,12 @@ namespace WebApplication2.Controllers
             :base(scopeContext,service)
         {
 
+        }
+
+        [AllowAnonymous]
+        public override Task<ActionResult> Get(string id)
+        {
+            return base.Get(id);
         }
     }
 }

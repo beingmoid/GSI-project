@@ -19,7 +19,7 @@ namespace BLL.Service.Services
         {
             foreach (var item in entities)
             {
-                item.RoleId = 1;
+                item.RoleId = 2;
                 item.IsActive = true;
                 item.token = Guid.NewGuid();
             }
