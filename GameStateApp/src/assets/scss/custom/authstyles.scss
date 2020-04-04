@@ -1,0 +1,50 @@
+.error-container {
+  text-align: left;
+}
+.logo-header {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  .company-logo {
+    height: 30px;
+    width: 30px;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .company-name {
+    margin-left: 5px;
+  }
+}
+.lock-screen-avatar {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:black;
+}
+.lock-screen-title {
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  padding:5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  .lock-screen-back {
+    padding: 0 5px 0 0 !important;
+  }
+}
+.lock-screen-check {
+  display: flex !important;
+  padding-top: 5px;
+  padding-left: 8px;
+  span {
+    padding: 3px;
+  }
+}
+.lock-screen-forgot-password {
+  display: block !important;
+  padding: 0 !important;
+}
