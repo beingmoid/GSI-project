@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Controllers
 {
@@ -86,7 +87,9 @@ namespace WebApplication2.Controllers
             }
         }
 
-        
+        [HttpGet("GetPlayers")]
+        public async Task<ActionResult> GetPlayers() => new JsonResult(await playerService.Get(x => x.Include(p => p.TeamPlayers), x => x.TeamPlayers.Count == 0));
+       
       
         [HttpGet("GetConfigInText")]
         public async Task<ActionResult> GetConfigText()

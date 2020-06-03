@@ -26,6 +26,8 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using WebApplication2.Controllers;
 using BLL.Service.Hubs;
+using Microsoft.AspNet.SignalR;
+using Microsoft.AspNetCore.Internal;
 
 namespace WebApplication2
 {
@@ -52,10 +54,11 @@ namespace WebApplication2
 
             services.AddDistributedMemoryCache();
             services.AddAutoMapper(typeof(AutoMapperMappings).Assembly);
+            services.AddSignalR();
             services.AddDbContext<EfContext, ApplicationContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddHttpContextAccessor();
-            services.AddSignalR();
+            
 
             services.AddAuthentication().AddSteam(options=> {
                 options.ApplicationKey = "8F48B0D274523F0FA2252C995B2CBCA1";
@@ -74,11 +77,14 @@ namespace WebApplication2
                     {
                         builder
                         .AllowAnyOrigin()
+                        
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
                     });
+                
             });
+            
 
             #region JWT
             var key = Encoding.ASCII.GetBytes(Configuration["JwtKey"]);
@@ -179,7 +185,7 @@ namespace WebApplication2
             services.AddScoped<ITeamPlayersService, TeamPlayersService>();
             services.AddScoped<IMatchDetailsService, MatchDetailsService>();
             services.AddScoped<IMatchRequestService, MatchRequestService>();
-            services.AddSingleton<MatchHub>();
+            services.AddScoped<MatchHub>();
             // services.AddScoped<IHttpContextAccessor,HttpContextAccessor>();
 
 
@@ -192,6 +198,7 @@ namespace WebApplication2
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
+
             //if (env.IsDevelopment())
             //{
             //    app.UseDeveloperExceptionPage();
@@ -201,17 +208,27 @@ namespace WebApplication2
             //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             //    app.UseHsts();
             //}
-            app.UseSignalR(routes =>
+
+            var hubConfiguration = new HubConfiguration
             {
-                routes.MapHub<MatchHub>("/match");
-            });
+#if DEBUG
+                EnableDetailedErrors = true
+#else
+            EnableDetailedErrors = false
+#endif
+            };
+
+           
+
+            
+           
             app.UseMiddleware<ExceptionMiddleware>();
            
             app.UseCors("AllowAll");
            
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseAuthentication();
-            app.UseSession();
+            //app.UseSession();
             app.UseMvc();
             
            

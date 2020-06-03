@@ -25,6 +25,7 @@ namespace WebApplication2.Controllers
 		public async Task<ActionResult> Post([FromBody] LoginInfo loginInfo)
 		{
 			return new JsonResult((await _loginService.Authenticate(loginInfo.Login, loginInfo.Password)));
+
 			//return new JsonResult(new { isSucess = true, msg = "done" });
 		}
 	}

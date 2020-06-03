@@ -184,14 +184,20 @@ class Wizard extends React.Component {
         }
       );
       console.log(this.state);
-      let user = JSON.parse(sessionStorage.user);
+      var user = JSON.parse(sessionStorage.user);
+      user.firstName =this.state.allStates.about.firstname;
+      user.lastName = this.state.allStates.about.lastname;
+      console.log(this.state.allStates.firstname);
+      console.log(user);
+      debugger;
      fetch(myConfig.BASEURL+'Player/'+user.id,{
       method:'PUT',
       headers:JSON.parse(sessionStorage.token===undefined ? '{}':sessionStorage.token),
-      body:JSON.stringify({FirstName:this.state.allStates.about.firstname,LastName:this.state.allStates.about.lastname})
+      body:JSON.stringify(user)
     }).then(res=> res.json())
     .then((data)=>{
       console.log(data)
+      sessionStorage.user=user;
     })                          
     }
   }

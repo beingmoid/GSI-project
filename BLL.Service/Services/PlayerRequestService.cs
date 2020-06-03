@@ -34,7 +34,7 @@ namespace BLL.Service.Services
                                                 }).SingleOrDefault();
                                         
                                         ;
-            await _matchub.TeamJoinRequest(response, entity.PlayerId);
+           // await _matchub.TeamJoinRequest(response, entity.PlayerId);
             
         }
     }

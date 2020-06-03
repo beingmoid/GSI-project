@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Controllers
 {
-   
-    public class MatchController : BaseController<Match,int>
+
+    public class MatchController : BaseController<Match, int>
     {
         IMatchService _service;
         private readonly ITeamPlayersService _teamPlayerService;
         private readonly IMatchRequestService _matchRequestService;
-        public MatchController(RequestScope scopeContext,IMatchService service, IMatchRequestService matchRequestService
-            , ITeamPlayersService teamPlayerService )
-            :base(scopeContext,service)
+        public MatchController(RequestScope scopeContext, IMatchService service, IMatchRequestService matchRequestService
+            , ITeamPlayersService teamPlayerService)
+            : base(scopeContext, service)
         {
             _service = service;
             _teamPlayerService = teamPlayerService;
@@ -30,14 +30,14 @@ namespace WebApplication2.Controllers
         [HttpPost("BeginMatch")]
         public async Task<ActionResult> BeginMatch([FromBody] BeginMatch request)
         {
-        
+
             await _matchRequestService.Delete(request.MatchRequestId);
 
             if (request.TeamId == request.TeamId2)
             {
                 throw new ServiceException(System.Net.HttpStatusCode.OK, "Both team cannot be same");
             }
-            Match m = new Match(); 
+            Match m = new Match();
             m.Team1Id = request.TeamId;
             m.Team2Id = request.TeamId2;
             m.IsActive = true;
@@ -50,14 +50,14 @@ namespace WebApplication2.Controllers
             return new JsonResult(match);
         }
         [HttpGet("CurrentMatch")]
-        public async Task<ActionResult> CurrentMatch(int ? teamId)
+        public async Task<ActionResult> CurrentMatch(int? teamId)
         {
             int TeamId;
-            if (teamId==null)
+            if (teamId == null)
             {
                 var user = this.User.FindFirst(x => x.Type == "UserId")?.Value;
                 TeamId = Convert.ToInt32((await _teamPlayerService.Get(x => x.PlayerId == user)).Values?.Select(x => x.Id));
-                return new JsonResult(TeamId>0?await _service.CurrentMatch(TeamId):"No Match Found");
+                return new JsonResult(TeamId > 0 ? await _service.CurrentMatch(TeamId) : "No Match Found");
             }
             return new JsonResult(await _service.CurrentMatch(Convert.ToInt32(teamId)));
         }

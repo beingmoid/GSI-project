@@ -30,7 +30,7 @@ namespace BLL.Service.Services
 
         public async Task<object> GetRequestReceived(int teamId)
         {
-            var requests= (await _matchRequestService.Get(o=>o.Include(props=>props.SenderTeam),x=>x.ReceiverTeamId==teamId && x.Status==null)).Values.Select(x => new {
+            var requests= (await _matchRequestService.Get(o=>o.Include(props=>props.SenderTeam),x=>x.ReceiverTeamId==teamId && x.Status==RequestStatus.Pending)).Values.Select(x => new {
                 Id=x.Id,
                 TeamName = x.SenderTeam.TeamName,
                 ContactNumber = x.Contact1,
@@ -61,6 +61,7 @@ namespace BLL.Service.Services
         //    //var teams = (await this.Get(x => x.PlayerId == PlayerId))?.Values.ToList();
         //   // return teams;
         //}
+        
         protected async override Task OnInserted(IEnumerable<Team> entities)
         {
             foreach (var entity in entities)

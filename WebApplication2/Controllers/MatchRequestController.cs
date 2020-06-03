@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Service.Hubs;
 using BLL.Service.Services;
 using DAL.Entities;
 using DAL.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication2.Controllers
@@ -13,9 +15,31 @@ namespace WebApplication2.Controllers
    
     public class MatchRequestController : BaseController<MatchRequest,int>
     {
-        public MatchRequestController(RequestScope scopeContext,IMatchRequestService service)
+        private IHubContext<MatchHub> _matchHub;
+        public MatchRequestController(RequestScope scopeContext,IMatchRequestService service
+            , IHubContext<MatchHub> matchHub)
             :base(scopeContext,service)
         {
+            _matchHub = matchHub;
+        }
+        public async override Task<ActionResult> Post([FromBody] MatchRequest entity)
+        {
+            entity.Status = RequestStatus.Pending;
+            var JsonResult=  await base.Post(entity);
+            var obj = (await this.Service.Get(x => x.Include(o => o.SenderTeam).
+                                                 Include(o => o.ReceiverTeam)
+                                                    , x => x.SenderTeamId == entity.SenderTeamId && x.ReceiverTeamId == entity.ReceiverTeamId
+                                                     && x.Status == RequestStatus.Pending
+                        ))
+                .Values
+                    .Select(x => new {
+                        SenderTeamName = x.SenderTeam.TeamName,
+                        SenderTeamLogo = x.SenderTeam.TeamImage,
+                        SenderTeamContact = x.Contact1,
+                    });
+            await _matchHub.Clients.All.SendCoreAsync("Send", new[] { obj});
+           // await _matchHub.MatchRequest(obj, entity.SenderTeamId, entity.ReceiverTeamId);
+            return  JsonResult;
 
         }
         [HttpGet("IsAccepted")]

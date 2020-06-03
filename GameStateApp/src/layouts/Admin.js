@@ -66,14 +66,6 @@ export default function Dashboard(props) {
       window.removeEventListener("resize", resizeFunction);
     };
   });
-  React.useEffect(()=>{
-    return ()=>{
-      if(sessionStorage.user.steamId==null)
-    {
-      window.location.href='/admin/wizard';
-    }
-    }
-  })
   // functions for changeing the states from components
   const handleImageClick = image => {
     setImage(image);
