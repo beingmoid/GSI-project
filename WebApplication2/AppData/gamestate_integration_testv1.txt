@@ -1,6 +1,6 @@
 "CS:GO Service Integration 0.1"
 {
- "uri" "http://localhost:62443/api/Values"
+ "uri" "http://localhost:4000/api/GameData/RequestPayload"
  "timeout" "5.0"
  "buffer"  "0.0"
  "throttle" "0.01"

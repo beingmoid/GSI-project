@@ -28,6 +28,7 @@ using WebApplication2.Controllers;
 using BLL.Service.Hubs;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Internal;
+using Microsoft.AspNetCore.Http.Connections;
 
 namespace WebApplication2
 {
@@ -145,6 +146,14 @@ namespace WebApplication2
                 options.Cookie.IsEssential = true;
 
             });
+
+            services.AddSignalR(
+             hubOptions =>
+             {
+                 hubOptions.EnableDetailedErrors = true;
+                 hubOptions.KeepAliveInterval = TimeSpan.FromMinutes(1);
+             }
+         );
             ConfigureRepositories(services);
             ConfigureAppServices(services);
         }
@@ -186,8 +195,9 @@ namespace WebApplication2
             services.AddScoped<IMatchDetailsService, MatchDetailsService>();
             services.AddScoped<IMatchRequestService, MatchRequestService>();
             services.AddScoped<MatchHub>();
+            services.AddSingleton<Microsoft.AspNetCore.SignalR.IUserIdProvider, UserIdProvider>();
             // services.AddScoped<IHttpContextAccessor,HttpContextAccessor>();
-
+            services.AddScoped<MatchHub>();
 
 
         }
@@ -209,19 +219,21 @@ namespace WebApplication2
             //    app.UseHsts();
             //}
 
-            var hubConfiguration = new HubConfiguration
+            app.UseSignalR(routes =>
             {
-#if DEBUG
-                EnableDetailedErrors = true
-#else
-            EnableDetailedErrors = false
-#endif
-            };
+                //routes.MapHub<NotificationHub>("/notificationHub");
+                routes.MapHub<MatchHub>("/matchHub", options =>
+                {
+                    options.Transports =
+                        HttpTransportType.WebSockets |
+                        HttpTransportType.LongPolling;
+                });
+            });
 
-           
 
-            
-           
+
+
+
             app.UseMiddleware<ExceptionMiddleware>();
            
             app.UseCors("AllowAll");
